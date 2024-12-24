@@ -1,10 +1,3 @@
----
-title: Backdoor CTF 2024 - Writeups
-time: 2024-12-23 18:00:00
-categories: [ctf]
-tags: [web,forensic]
-image: Files/icon.png
----
 
 Mes writeups pour les challenges que j'ai réussi à résoudre durant le BackdoorCTF 2024. 
 
