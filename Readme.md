@@ -3,7 +3,7 @@ title: Backdoor CTF 2024 - Writeups
 time: 2024-12-23 18:00:00
 categories: [ctf]
 tags: [web,forensic]
-image: icon.png
+image: Files/icon.png
 ---
 
 Mes writeups pour les challenges que j'ai réussi à résoudre durant le BackdoorCTF 2024. 
@@ -53,16 +53,16 @@ Finished
 
 La route ``login`` pour se connecter.
 
-![login](/assets/posts/backdoorctf2024/login.png)
+![login](Files/login.png)
 
 
 On doit préalablement s'inscrire par la route ``register``.
 
- ![register](/register.png)
+ ![register](Files/register.png)
 
  Je m'inscris sous le username `{7*7}test1` et je me connecte. On tombe sur un site vitrine avec des articles.
 
-![home](/home.png)
+![home](Files/home.png)
  
 On peut consulter les détails d'un article, l'ajouter aux favoris. Rien de ce côté ne menais vers le flag. 
 
@@ -199,38 +199,38 @@ jwttool_5e89f9de2e7d954ca69bb8007aeb69e1 - Tampered token - HMAC Signing:
 
 J'ai utilisé le nouveau jwt et j'ai réussi à me connecter en tant qu'admin. 
 
-![admin](adminprofile.png)
-![admin2](paneladmin.png)
+![admin](Files/adminprofile.png)
+![admin2](Files/paneladmin.png)
 
 Je pensais avoir fini avec ce défi mais c'était un trou de lapin. Le flag sur la page d'administration `flag{d0_y0u_r34lly_th1nk_th15_is_th3_r34l_fl4g}` est fake. 
 
 Il est temps de se pencher sur les autres routes que gobuster nous a énumérés. En analysant la route `/support`
 avec quelques exploits j'ai vu une vulnérabilité ssti. 
 
-![ssti](support.png)
+![ssti](Files/support.png)
 
 > Comment l'exploiter ? 
 
 Notre site est une application web Flask python.  
 
-![tech](wappy.png)
+![tech](Files/wappy.png)
 
 J'ai commencé avec les payloads hacktrics sans succès. Mais à travers les réponses j'ai constaté que nous avons affaire à une IA qui avait des restrictions sur la lecture des fichiers sensibles. 
 
 Après plusieurs essaies j'ai utilisé ce payload pour avoir le flag :
 
 
-![flag](flag.png)
+![flag](Files/flag.png)
 
 ##  Cursed Credential [Forensic] 46 Solves
 
 ``Description``: I forgot my Browser's saved password although a friend of mine tells that I can find it if I know my master key. The problem is I dont even remember that, hopefully you can rock your brain and help me out.
 
-``File`` : [chal.zip](chal.zip)
+``File`` : [chal.zip](Files/chal.zip)
 
 ``Flag`` : `flag{n0_p@ssw0rd_15_s3cur3??}`
 
-En décompressant l'archive, nous avons trois fichiers [cert9.db](cert9.db), [ke4.dby](key4.db) et [logins.json](logins.json). Je n'étais pas encore tombé sur ce genre de ctf auparavant. Que peut-on d'abord retenir de la description du défi : 
+En décompressant l'archive, nous avons trois fichiers [cert9.db](Files/cert9.db), [ke4.dby](Files/key4.db) et [logins.json](Files/logins.json). Je n'étais pas encore tombé sur ce genre de ctf auparavant. Que peut-on d'abord retenir de la description du défi : 
 
 1. Nous avons affaire à des bases de données de mots de passe d'un navigateur 
    
